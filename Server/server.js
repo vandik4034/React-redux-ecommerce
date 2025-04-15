@@ -59,9 +59,7 @@ app.post("/api/signup", async (req, res) => {
       .input("email", email)
       .input("password", password)
       .input("name", name)
-      .query(
-        "INSERT INTO Users (email, password, name) VALUES (@email, @password, @name)"
-      );
+      .query("INSERT INTO Users (email, password, name) VALUES (@email, @password, @name)");
 
     res.status(201).json({ message: "Sign Up Successful" });
   } catch (err) {
@@ -70,15 +68,9 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
+
 app.post("/api/cart", async (req, res) => {
-  const {
-    userEmail,
-    id,
-    title,
-    price,
-    quantity,
-    action = "incrment",
-  } = req.body;
+  const { userEmail, id, title, price, quantity, action="incrment"} = req.body;
 
   if (!userEmail || !id || !title) {
     return res.status(400).json({ message: "Missing data" });
@@ -86,37 +78,36 @@ app.post("/api/cart", async (req, res) => {
 
   try {
     const pool = await connectToDB();
+
     const checkCart = await pool
       .request()
       .input("userEmail", userEmail)
-      .input("id", id)
-      .query(`SELECT * FROM Cart WHERE UserEmail = @userEmail AND id = @id`);
+      .input("id", id).query(`
+        SELECT * FROM Cart WHERE UserEmail = @userEmail AND id = @id
+      `);
 
     if (checkCart.recordset.length > 0) {
       if (action === "set") {
+
         await pool
-          .request()
-          .input("userEmail", userEmail)
-          .input("id", id)
-          .input("title", title)
-          .input("price", price)
-          .input("quantity", parseInt(quantity)).query(`
+        .request()
+        .input("userEmail", userEmail)
+        .input("id", id)
+        .input("title", title)
+        .input("quantity", parseInt(quantity)).query(`
           UPDATE Cart
-          SET Quantity =  @quantity,
-          Price = @price
+          SET Quantity =  @quantity
           WHERE UserEmail = @userEmail AND id = @id
         `);
       } else {
-        await pool
-          .request()
-          .input("userEmail", userEmail)
-          .input("id", id)
-          .input("title", title)
-          .input("price", price)
-          .input("quantity", parseInt(quantity)).query(`
+      await pool
+        .request()
+        .input("userEmail", userEmail)
+        .input("id", id)
+        .input("title", title)
+        .input("quantity", parseInt(quantity)).query(`
           UPDATE Cart
-          SET Quantity = Quantity + @quantity,
-          Price = @price
+          SET Quantity = Quantity + @quantity
           WHERE UserEmail = @userEmail AND id = @id
         `);
       }
@@ -143,9 +134,9 @@ app.post("/api/cart", async (req, res) => {
 });
 
 app.put("/api/cart", async (req, res) => {
-  const { userEmail, id, title, price, quantity } = req.body;
+  const { userEmail, id, title, quantity } = req.body;
 
-  if (!userEmail || !id || title || !quantity || !price) {
+  if (!userEmail || !id || !title || quantity === undefined) {
     return res.status(400).json({ message: "Missing data" });
   }
 
@@ -157,8 +148,8 @@ app.put("/api/cart", async (req, res) => {
       .input("userEmail", userEmail)
       .input("id", id)
       .input("title", title)
-      .input("price", price)
-      .input("quantity", quantity).query(`
+      .input("quantity", quantity)
+      .query(`
         UPDATE Cart
         SET Quantity = @quantity
         WHERE UserEmail = @userEmail AND id = @id
@@ -181,7 +172,11 @@ app.delete("/api/cart", async (req, res) => {
   try {
     const pool = await connectToDB();
 
-    await pool.request().input("userEmail", userEmail).input("id", id).query(`
+    await pool
+      .request()
+      .input("userEmail", userEmail)
+      .input("id", id)
+      .query(`
         DELETE FROM Cart
         WHERE UserEmail = @userEmail AND id = @id
       `);
@@ -193,34 +188,41 @@ app.delete("/api/cart", async (req, res) => {
   }
 });
 
-app.delete("/api/cart/clear", async (req, res) => {
-  const { userEmail } = req.body;
+app.delete('/api/cart/clear', async (req, res) => {
+
+  const {userEmail} = req.body;
 
   if (!userEmail) {
-    return res.status(400).json({ message: "user email is required" });
+
+    return res.status(400).json({message: "user email is required"});
   }
 
   try {
+
     const pool = await connectToDB();
 
-    await pool
-      .request()
-      .input("userEmail", userEmail)
-      .query("DELETE  FROM Cart WHERE UserEmail = @userEmail");
+    await pool 
+    .request()
+    .input("userEmail", userEmail)
+    .query("DELETE  FROM Cart WHERE UserEmail = @userEmail");
 
-    await pool
-      .request()
-      .input("email", userEmail)
-      .query("Delete  FROM Users WHERE Email = @email");
+    await pool 
+    .request()
+    .input("email", userEmail)
+    .query("Delete  FROM Users WHERE Email = @email")
 
-    res.status(200).json({ message: "cart and user deleted successfully" });
-  } catch (error) {
+    res.status(200).json({message: "cart and user deleted successfully"});
+  } catch(error) {
+
     console.error("clear cart & user delete error:", error);
-    res.status(500).json({ message: "server error", error: error.message });
+    res.status(500).json({message: "server error", error: error.message});
   }
+
 });
 
-// dummy api login
+
+
+// dummy api login 
 
 app.get("/api/login", (req, res) => {
   res.status(200).json({ message: "GET request not allowed, use POST." });
@@ -239,6 +241,7 @@ app.get("/api/cart", async (req, res) => {
     res.status(500).json({ message: "Server Error", error: error.message });
   }
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);

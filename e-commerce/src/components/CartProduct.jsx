@@ -22,6 +22,7 @@ const CartProduct = ({ id, img, title, price, quantity }) => {
         userEmail: user?.email,
         id,
         price,
+        title,
 
         quantity: newQuantity,
       });
