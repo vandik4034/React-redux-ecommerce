@@ -23,7 +23,6 @@ const CartProduct = ({ id, img, title, price, quantity }) => {
         id,
         price,
         title,
-
         quantity: newQuantity,
       });
 
@@ -45,7 +44,7 @@ const CartProduct = ({ id, img, title, price, quantity }) => {
         userEmail: user?.email,
         id,
         price,
-
+        title,
         quantity: newQuantity,
       });
       toast.success("quantity decresed");
@@ -83,7 +82,7 @@ const CartProduct = ({ id, img, title, price, quantity }) => {
           <h3 className="font-medium">{title}</h3>
 
           <p className="text-gray-600 text-[14px]">
-            {quantity} X ${price}
+            {quantity} X ${price} = ${(quantity * price).toFixed(2)}
           </p>
 
           <div>

@@ -1,6 +1,7 @@
 import ProductCard from "./ProductCard";
 import { useState, useEffect, useCallback } from "react";
 import debounce from "lodash.debounce";
+import { forwardRef } from "react";
 
 const products = [
   {
@@ -61,7 +62,9 @@ const products = [
   },
 ];
 
-const TrendingProduct = ({ searchQuery }) => {
+
+
+const TrendingProduct = forwardRef(({ searchQuery }, ref) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
 
   const handleSearchDebounced = useCallback(
@@ -70,15 +73,14 @@ const TrendingProduct = ({ searchQuery }) => {
         const filtered = products.filter((product) =>
           product.title.toLowerCase().includes(query.toLowerCase())
         );
-
         setFilteredProducts(filtered);
       } else {
         setFilteredProducts(products);
       }
     }, 500),
-
     []
   );
+  
 
   useEffect(() => {
     handleSearchDebounced(searchQuery);
@@ -87,7 +89,9 @@ const TrendingProduct = ({ searchQuery }) => {
   return (
     <div className="container mt-32">
       <div className="sm:flex justify-between items-center">
+        <section ref={ref} className="mt-10">
         <h2 className="text-4xl font-medium">Trending Products</h2>
+        </section>
 
         <div className="text-gray-500 flex gap-4 text-xl mt-4 sm:mt-0">
           <div className="text-black">New</div>
@@ -112,6 +116,6 @@ const TrendingProduct = ({ searchQuery }) => {
       </div>
     </div>
   );
-};
+});
 
 export default TrendingProduct;

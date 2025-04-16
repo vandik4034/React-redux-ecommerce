@@ -1,6 +1,6 @@
 
 
-const Hero = () =>  {
+const Hero = ({onShopNowClick}) =>  {
   return(
    <div className="bg-slate-400 mt-4">
 
@@ -17,7 +17,13 @@ const Hero = () =>  {
             <h3 className="text-2xl font-['oregano,cursive ']">
                 Exclusive offer <span className="text-red-600">-10%</span> off this week
             </h3>
-            <a className="inline-block bg-white rounded-md px-6 py-3 hover:bg-accent hover:text-white" href="#">Shop Now</a>
+
+            <button
+              onClick={onShopNowClick}
+              className="bg-white rounded-md px-6 py-3 hover:bg-accent hover:text-white"
+            >
+              Shop Now
+            </button>
             </div>
         </div>
 

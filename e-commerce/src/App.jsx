@@ -16,6 +16,8 @@ import Cart from "./components/Cart";
 import { useEffect, useState } from "react";
 import LoginForm from "./components/LoginForm";
 import SignUp from "./components/Signup";
+import { useRef } from "react";
+
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -23,6 +25,13 @@ const App = () => {
   const [showCart, setShowCart] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
+
+  const trendingRef = useRef(null);
+
+  const scrollToTrending = () => {
+
+    trendingRef.current?.scrollIntoView({ behavior: "smooth"});
+  };
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -59,10 +68,10 @@ const App = () => {
             path="/"
             element={
               <>
-                <Hero />
+                <Hero onShopNowClick={scrollToTrending}/>
                 <Features />
                 <FeatureCard />
-                <TrendingProduct searchQuery={searchQuery} />
+                <TrendingProduct searchQuery={searchQuery} ref={trendingRef}/>
                 <ProductCard />
                 <Banner />
                 <NewArrival />

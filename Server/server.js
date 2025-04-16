@@ -136,7 +136,7 @@ app.post("/api/cart", async (req, res) => {
 app.put("/api/cart", async (req, res) => {
   const { userEmail, id, title, quantity } = req.body;
 
-  if (!userEmail || !id || !title || quantity === undefined) {
+  if (!userEmail || !id || !title || !quantity ) {
     return res.status(400).json({ message: "Missing data" });
   }
 
