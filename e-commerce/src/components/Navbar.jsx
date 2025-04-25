@@ -103,6 +103,11 @@ const Navbar = ({ setShowCart, onSearch, user, setUser }) => {
   const cartCount = useAppSelector((state) => state.cartReducer.length);
   const navigate = useNavigate();
 
+  const handleLogoClick = () => {
+    navigate("/"); // Navigate to home page
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  };
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
 
@@ -152,7 +157,7 @@ const Navbar = ({ setShowCart, onSearch, user, setUser }) => {
     <div className="pt-4 bg-yellow-600 top-0 sticky">
       <div className="container">
         <div className="flex justify-between items-center">
-          <Link to={'/'} className="text-4xl font-bold text-blue-950">Logo</Link>
+          <Link to="/" className="text-4xl font-bold text-blue-950"  onClick={handleLogoClick}>Logo</Link>
 
           <div className=" relative lg:flex hidden w-full max-w-[500px]">
             <input
