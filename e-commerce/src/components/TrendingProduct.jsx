@@ -68,7 +68,7 @@ const TrendingProduct = forwardRef(({ searchQuery }, ref) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
 
   const handleSearchDebounced = useCallback(
-    debounce((query) => {
+    debounce((query) => {   
       if (query.trim()) {
         const filtered = products.filter((product) =>
           product.title.toLowerCase().includes(query.toLowerCase())
@@ -87,7 +87,7 @@ const TrendingProduct = forwardRef(({ searchQuery }, ref) => {
   }, [searchQuery, handleSearchDebounced]);
 
   return (
-    <div className="container mt-32">
+    <div className="container mt-16">
       <div className="sm:flex justify-between items-center">
         <section ref={ref} className="mt-10">
         <h2 className="text-4xl font-medium">Trending Products</h2>
@@ -102,7 +102,7 @@ const TrendingProduct = forwardRef(({ searchQuery }, ref) => {
         </div>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-8">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-8">
         {filteredProducts.map((item) => (
           <ProductCard
             key={item.id}

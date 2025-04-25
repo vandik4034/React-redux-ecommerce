@@ -2,7 +2,7 @@
 
 const Banner = () => {
   return (
-    <div className="container mt-32">
+    <div className="container mt-16">
 
         <div className="grid lg:grid-cols-[66%,34%] gap-4 pr-[15px]">
 

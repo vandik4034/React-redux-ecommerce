@@ -37,7 +37,7 @@ const products = [
 
 const NewArrival = () => {
   return (
-    <div className="container mt-32">
+    <div className="container mt-16">
         
         <div className="sm:flex justify-between items-center">
 

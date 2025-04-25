@@ -5,10 +5,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
-import FeatureCard from "./components/FeatureCard";
+
 import TrendingProduct from "./components/TrendingProduct";
 import { Toaster } from "react-hot-toast";
-import ProductCard from "./components/ProductCard";
+
 import Banner from "./components/Banner";
 import NewArrival from "./components/NewArrival";
 import Footer from "./components/Footer";
@@ -70,9 +70,9 @@ const App = () => {
               <>
                 <Hero onShopNowClick={scrollToTrending}/>
                 <Features />
-                <FeatureCard />
+                
                 <TrendingProduct searchQuery={searchQuery} ref={trendingRef}/>
-                <ProductCard />
+                
                 <Banner />
                 <NewArrival />
 
