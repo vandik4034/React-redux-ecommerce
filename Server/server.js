@@ -258,7 +258,8 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://e-commerce6952.netlify.app/'
+  'https://gleaming-cocada-5dd813.netlify.app/',
+  'https://react-redux-ecommerce-7.onrender.com'
 ];
 
 app.use(express.json());
