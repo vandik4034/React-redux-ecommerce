@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const backendUrl = "https://react-redux-ecommerce-7.onrender.com";
+
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +14,7 @@ function SignUp() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/api/signup", {
+      const response = await axios.post(`${backendUrl}/api/signup`, {
         email,
         password,
         name,

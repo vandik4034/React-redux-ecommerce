@@ -6,6 +6,8 @@ import axios from "axios";
 import CartProduct from "./CartProduct";
 import toast from "react-hot-toast";
 
+const backendUrl = "https://react-redux-ecommerce-7.onrender.com";
+
 const Cart = ({ setShowCart }) => {
   const products = useAppSelector((state) => state.cartReducer);
 
@@ -25,7 +27,7 @@ const Cart = ({ setShowCart }) => {
     const userEmail = user?.email;
 
     try {
-      const res = await axios.delete("http://localhost:5000/api/cart/clear", {
+      const res = await axios.delete(`${backendUrl}/api/cart/clear`, {
         data: { userEmail },
       });
 

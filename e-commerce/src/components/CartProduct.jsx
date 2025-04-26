@@ -8,6 +8,8 @@ import { RxCross1 } from "react-icons/rx";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+const backendUrl = "https://react-redux-ecommerce-7.onrender.com";
+
 const CartProduct = ({ id, img, title, price, quantity }) => {
   const dispatch = useDispatch();
 
@@ -18,7 +20,7 @@ const CartProduct = ({ id, img, title, price, quantity }) => {
 
     dispatch(incrementQuantity(id));
     try {
-      await axios.put("http://localhost:5000/api/cart", {
+      await axios.put(`${backendUrl}/api/cart`, {
         userEmail: user?.email,
         id,
         price,
@@ -40,7 +42,7 @@ const CartProduct = ({ id, img, title, price, quantity }) => {
     dispatch(decrementQuantity(id));
 
     try {
-      await axios.put("http://localhost:5000/api/cart", {
+      await axios.put(`${backendUrl}/api/cart`, {
         userEmail: user?.email,
         id,
         price,
@@ -60,7 +62,7 @@ const CartProduct = ({ id, img, title, price, quantity }) => {
     dispatch(removeFromCart(id));
 
     try {
-      await axios.delete("http://localhost:5000/api/cart", {
+      await axios.delete(`${backendUrl}/api/cart`, {
         data: {
           userEmail: user?.email,
           id,

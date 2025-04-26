@@ -6,6 +6,8 @@ import { addToCart } from "../redux/features/cartSlice";
 import toast from "react-hot-toast";
 import axios from "axios";
 
+const backendUrl = "https://react-redux-ecommerce-7.onrender.com";
+
 const ProductCard = ({ id, img, category, title, price }) => {
   const dispatch = useDispatch();
 
@@ -29,7 +31,7 @@ const ProductCard = ({ id, img, category, title, price }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/cart",
+        `${backendUrl}/api/cart`,
         payload
       );
       if (response.status === 200) {
