@@ -258,7 +258,7 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://lucky-sprite-5e1888.netlify.app/',
+  'https://lucky-sprite-5e1888.netlify.app',
   'https://react-redux-ecommerce-7.onrender.com'
 ];
 
