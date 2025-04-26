@@ -292,8 +292,8 @@ app.post("/api/login", async (req, res) => {
 
 // Dummy Signup API
 app.post("/api/signup", async (req, res) => {
+  const { email, password, name } = req.body;
   try {
-    const { email, password, name } = req.body;
     if (!email || !password || !name) {
       return res.status(400).json({ message: "Email or password missing" });
     }
