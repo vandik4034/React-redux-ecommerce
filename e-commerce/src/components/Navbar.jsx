@@ -154,7 +154,7 @@ const Navbar = ({ setShowCart, onSearch, user, setUser }) => {
   };
 
   return (
-    <div className="pt-4 bg-yellow-600 top-0 sticky">
+    <div className="pt-2 bg-yellow-600 top-0 sticky">
       <div className="container">
         <div className="flex justify-between items-center">
           <Link to="/" className="text-4xl font-bold text-blue-950"  onClick={handleLogoClick}>Logo</Link>

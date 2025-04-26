@@ -31,8 +31,9 @@ function SignUp() {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-slate-600 rounded-xl w-full  shadow dark:border md:mt-0 sm:max-w-md xl:p-12 dark:bg-gray-800 dark:border-gray-700">
-      <h2 className="text-2xl text-center font-bold w-full mb-4text-xl leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Create An Account</h2>
+    <div className="min-h-screen flex items-center justify-center p-5">
+    <div className="max-w-md  mx-auto bg-slate-600 rounded-xl w-full p-4 shadow dark:border md:mt-0 sm:max-w-md xl:p-12 dark:bg-gray-800 dark:border-gray-700">
+      <h2 className="text-2xl text-center font-bold w-full mb-4  leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Create An Account</h2>
       <form onSubmit={handleSubmit}>
 
       <div className="mb-4">
@@ -83,6 +84,7 @@ function SignUp() {
           Sign Up
         </button>
       </form>
+    </div>
     </div>
   );
 }
